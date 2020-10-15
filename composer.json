@@ -1,0 +1,52 @@
+{
+    "name": "seungmun/sens-php",
+    "description": "PHP Client for using NCLOUD SENS's API.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Seungmun Jeong",
+            "email": "seungmunj@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "seungmunj@gmail.com"
+    },
+    "require": {
+        "php": "^7.1",
+        "ext-json": "*",
+        "php-http/cache-plugin": "^1.7",
+        "php-http/client-common": "^2.3",
+        "php-http/discovery": "^1.12",
+        "php-http/httplug": "^2.2",
+        "php-http/multipart-stream-builder": "^1.1",
+        "psr/cache": "^1.0",
+        "psr/http-client": "^1.0",
+        "psr/http-message": "^1.0"
+    },
+    "require-dev": {
+        "guzzlehttp/psr7": "^1.7",
+        "http-interop/http-factory-guzzle": "^1.0",
+        "php-http/guzzle6-adapter": "^2.0",
+        "phpunit/phpunit": "^9.4"
+    },
+    "provide": {
+        "psr/http-client-implementation": "^1.0",
+        "psr/http-factory-implementation": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sens\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Sens\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true
+    }
+}
