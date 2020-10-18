@@ -117,15 +117,21 @@ class Signature
      */
     public function sign()
     {
-        $clues = [];
+        $path = $this->request->getUri()->getPath();
 
-        array_push($clues, strtoupper($this->request->getMethod()).' '.$this->request->getUri());
-        array_push($clues, $this->timestamp->getTimestamp());
-        array_push($clues, $this->credentials->getAccessKey());
+        if ($query = $this->request->getUri()->getQuery()) {
+            $path .= '?'.$query;
+        }
+
+        $clues = [
+            strtoupper($this->request->getMethod()).' '.$path,
+            $this->timestamp->getTimestamp(),
+            $this->credentials->getAccessKey(),
+        ];
 
         $secretKey = utf8_encode($this->credentials->getSecretKey());
-        $data = utf8_encode(implode(PHP_EOL, $clues));
-        $hash = hex2bin(hash_hmac('SHA256', $data, $secretKey));
+        $data = utf8_encode(implode("\n", $clues));
+        $hash = hex2bin(hash_hmac('sha256', $data, $secretKey));
 
         return base64_encode($hash);
     }
