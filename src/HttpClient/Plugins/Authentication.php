@@ -42,7 +42,15 @@ class Authentication implements Plugin
      */
     public function handleRequest(RequestInterface $request, callable $next, callable $first): Promise
     {
-        $signature = new Signature($request, $this->credentials, new Timestamp());
+        /**
+         * The elapsed time from January 1, 1970 00:00:00 Coordinated Universal Time (UTC), expressed in milliseconds.
+         * If the time difference from the API Gateway server is more than 5 minutes, the request is considered invalid.
+         *
+         * Usually, it takes only a few seconds from creation of this timestamp to processing time of the request,
+         * so it is not a problem even if the logic is separated and processed.
+         */
+        $timestamp = new Timestamp();
+        $signature = new Signature($request, $this->credentials, $timestamp);
 
         $request->withHeader('x-ncp-iam-access-key', $signature->getCredentials()->getAccessKey());
         $request->withHeader('x-ncp-apigw-timestamp', (string) $signature->getTimestamp());
