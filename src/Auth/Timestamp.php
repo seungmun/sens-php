@@ -28,7 +28,7 @@ class Timestamp
      */
     protected function makeTimestamp()
     {
-        return strval((int)round(microtime(true) * 1000));
+        return strval((int) round(microtime(true) * 1000));
     }
 
     /**

@@ -83,6 +83,7 @@ class Signature
     public function setCredentials(Credentials $credentials)
     {
         $this->credentials = $credentials;
+
         return $this;
     }
 
@@ -118,7 +119,7 @@ class Signature
     {
         $clues = [];
 
-        array_push($clues, strtoupper($this->request->getMethod()) . " " . $this->request->getUri());
+        array_push($clues, strtoupper($this->request->getMethod()).' '.$this->request->getUri());
         array_push($clues, $this->timestamp->getTimestamp());
         array_push($clues, $this->credentials->getAccessKey());
 

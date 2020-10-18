@@ -45,8 +45,8 @@ class Authentication implements Plugin
         $signature = new Signature($request, $this->credentials, new Timestamp());
 
         $request->withHeader('x-ncp-iam-access-key', $signature->getCredentials()->getAccessKey());
-        $request->withHeader('x-ncp-apigw-timestamp', (string)$signature->getTimestamp());
-        $request->withHeader('x-ncp-apigw-signature-v2', (string)$signature);
+        $request->withHeader('x-ncp-apigw-timestamp', (string) $signature->getTimestamp());
+        $request->withHeader('x-ncp-apigw-signature-v2', (string) $signature);
 
         return $next($request);
     }
