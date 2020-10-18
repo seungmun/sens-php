@@ -96,7 +96,7 @@ class Builder
      */
     public function getHttpClient()
     {
-        if (!$this->pluginClient) {
+        if (! $this->pluginClient) {
             $plugins = $this->plugins;
 
             if ($this->cachePlugin) {
@@ -145,6 +145,7 @@ class Builder
     public function setRequestFactory(RequestFactoryInterface $requestFactory)
     {
         $this->requestFactory = $requestFactory;
+
         return $this;
     }
 
@@ -217,7 +218,7 @@ class Builder
     public function unregisterPlugin(string $class)
     {
         foreach ($this->plugins as $index => $plugin) {
-            if (!$plugin instanceof $class) {
+            if (! $plugin instanceof $class) {
                 continue;
             }
 
@@ -239,7 +240,7 @@ class Builder
     {
         $cacheKeys = ['Authorization', 'Cookie', 'Accept', 'Content-Type'];
 
-        if (!isset($config['cache_key_generator'])) {
+        if (! isset($config['cache_key_generator'])) {
             $config['cache_key_generator'] = new HeaderCacheKeyGenerator($cacheKeys);
         }
 
