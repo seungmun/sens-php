@@ -41,7 +41,7 @@ class DefaultHeader implements Plugin
     public function handleRequest(RequestInterface $request, callable $next, callable $first): Promise
     {
         foreach ($this->headers as $key => $value) {
-            if (!$request->hasHeader($key)) {
+            if (! $request->hasHeader($key)) {
                 $request = $request->withHeader($key, $value);
             }
         }

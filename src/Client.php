@@ -93,7 +93,7 @@ class Client
     }
 
     /**
-     * Set the uri for http client builder
+     * Set the uri for http client builder.
      *
      * @param  string  $url
      * @return \Sens\Client
