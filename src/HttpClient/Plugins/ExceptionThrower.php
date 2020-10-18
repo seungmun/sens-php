@@ -28,8 +28,9 @@ class ExceptionThrower implements Plugin
             $status = $response->getStatusCode();
 
             if ($status >= 400 && $status < 600) {
-                throw self::handle($status,
-                    ResponseMediator::getErrorMessage($response) ?? $response->getReasonPhrase());
+                // Todo: Create a response mediator.
+                /* throw self::handle($status,
+                    ResponseMediator::getErrorMessage($response) ?? $response->getReasonPhrase()); */
             }
 
             return $response;
