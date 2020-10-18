@@ -202,14 +202,14 @@ class Builder
      */
     public function registerPlugin(Plugin $plugin)
     {
-        $this->plugin[] = $plugin;
+        $this->plugins[] = $plugin;
         $this->pluginClient = null;
 
         return $this;
     }
 
     /**
-     * Remove a
+     * remove a specified full qualified class of plugin from the plugin chain.
      *
      * @param  string  $class
      * @return \Sens\HttpClient\Builder
