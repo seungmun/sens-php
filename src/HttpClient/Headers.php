@@ -15,4 +15,11 @@ interface Headers
      * @var string
      */
     public const USER_AGENT = 'seungmun-sens-php-client/1.0';
+
+    /**
+     * The json content type.
+     *
+     * @var string
+     */
+    public const CONTENT_TYPE_JSON = 'application/json; charset=utf-8';
 }

@@ -66,6 +66,7 @@ class Client
             ->registerPlugin(new RedirectPlugin())
             ->registerPlugin(new DefaultHeader([
                 'User-Agent' => Headers::USER_AGENT,
+                'Content-Type' => Headers::CONTENT_TYPE_JSON,
             ]));
     }
 
