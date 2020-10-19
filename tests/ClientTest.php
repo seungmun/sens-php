@@ -26,6 +26,7 @@ class ClientTest extends TestCase
         $this->assertTrue($credentials->validate());
     }
 
+    /*
     public function testSimpleRequest()
     {
         $credentials = new Credentials('test', 'test');
@@ -36,4 +37,5 @@ class ClientTest extends TestCase
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertInstanceOf(ResponseInterface::class, $response);
     }
+    */
 }

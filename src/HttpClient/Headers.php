@@ -7,7 +7,7 @@ interface Headers
     /**
      * The base url.
      */
-    public const BASE_URL = 'https://sens.apigw.ntruss.com/common/v2';
+    public const BASE_URL = 'https://sens.apigw.ntruss.com';
 
     /**
      * The user agent.
