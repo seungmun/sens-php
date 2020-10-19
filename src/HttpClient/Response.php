@@ -31,7 +31,7 @@ class Response
      */
     public function getBody()
     {
-        $body = (string)$this->response->getBody();
+        $body = (string) $this->response->getBody();
 
         if (! empty($body) && $this->getHeader('Content-Type') === Headers::CONTENT_TYPE_JSON) {
             return JsonSerializer::decode($body);

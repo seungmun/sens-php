@@ -4,5 +4,4 @@ namespace Sens\Drivers;
 
 class Project
 {
-
 }
