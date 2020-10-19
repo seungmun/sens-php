@@ -12,7 +12,9 @@ class QueryStringBuilder
      */
     public static function build(array $queries = [])
     {
-        if (count($queries) < 1) return '';
+        if (count($queries) < 1) {
+            return '';
+        }
         $queries = http_build_query($queries, '', '&', PHP_QUERY_RFC3986);
 
         return $queries;
