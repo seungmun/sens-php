@@ -97,6 +97,6 @@ class Credentials
      */
     public function validate()
     {
-        return !!!(empty($this->accessKey) && empty($this->secretKey));
+        return ! (bool) (empty($this->accessKey) && empty($this->secretKey));
     }
 }
