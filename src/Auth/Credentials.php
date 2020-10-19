@@ -24,7 +24,7 @@ class Credentials
      * @param  string  $accessKey
      * @param  string  $secretKey
      */
-    public function __construct(string $accessKey, string $secretKey)
+    public function __construct(string $accessKey = '', string $secretKey = '')
     {
         $this->accessKey = $accessKey;
         $this->secretKey = $secretKey;
@@ -74,5 +74,29 @@ class Credentials
         $this->secretKey = $secretKey;
 
         return $this;
+    }
+
+    /**
+     * Set the credentials with the given array.
+     *
+     * @param  array  $credentials
+     * @return \Sens\Auth\Credentials
+     */
+    public function fromArray(array $credentials)
+    {
+        $this->setAccessKey($credentials['access_key'])
+            ->setSecretKey($credentials['secret_key']);
+
+        return $this;
+    }
+
+    /**
+     * Determine if the credentials are valid.
+     *
+     * @return bool
+     */
+    public function validate()
+    {
+        return !!!(empty($this->accessKey) && empty($this->secretKey));
     }
 }

@@ -6,8 +6,11 @@ use Http\Client\Common\Plugin\AddHostPlugin;
 use Http\Client\Common\Plugin\HistoryPlugin;
 use Http\Client\Common\Plugin\RedirectPlugin;
 use Psr\Http\Client\ClientInterface;
+use Sens\Auth\Credentials;
+use Sens\Exceptions\SensSdkException;
 use Sens\HttpClient\Builder;
 use Sens\HttpClient\Headers;
+use Sens\HttpClient\Plugins\Authentication;
 use Sens\HttpClient\Plugins\DefaultHeader;
 use Sens\HttpClient\Plugins\ExceptionThrower;
 use Sens\HttpClient\Plugins\ResponseHistory;
@@ -31,14 +34,17 @@ class Client
     /**
      * Create a new Sens client.
      *
+     * @param  \Sens\Auth\Credentials|array|null  $credentials
      * @param  \Sens\HttpClient\Builder|null  $httpClientBuilder
+     * @throws \Sens\Exceptions\SensSdkException
      */
-    public function __construct(Builder $httpClientBuilder = null)
+    public function __construct($credentials = null, Builder $httpClientBuilder = null)
     {
         $this->responseHistory = new ResponseHistory();
 
         $this->initializeHttpBuilder($httpClientBuilder);
         $this->initializePlugins();
+        $this->initializeAuthentication($credentials);
     }
 
     /**
@@ -68,6 +74,30 @@ class Client
                 'User-Agent' => Headers::USER_AGENT,
                 'Content-Type' => Headers::CONTENT_TYPE_JSON,
             ]));
+    }
+
+    /**
+     * Initialize the api authentication plugin.
+     *
+     * @param  Credentials|array|null  $credentials
+     * @return void
+     * @throws \Sens\Exceptions\SensSdkException
+     */
+    protected function initializeAuthentication($credentials)
+    {
+        if (! $credentials) {
+            throw new SensSdkException('api credentials are required.');
+        }
+
+        if (! $credentials instanceof Credentials && is_array($credentials)) {
+            $credentials = (new Credentials())->fromArray($credentials);
+        }
+
+        if (! $credentials->validate()) {
+            throw new SensSdkException('invalid api credentials are given.');
+        }
+
+        $this->httpClientBuilder->registerPlugin(new Authentication($credentials));
     }
 
     /**
